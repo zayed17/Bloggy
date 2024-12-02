@@ -3,8 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({
-    // baseUrl: 'http://localhost:1717/api/users/',
-    baseUrl: 'https://bloggy-backend-nine.vercel.app/api/users/',
+    baseUrl: `${import.meta.env.VITE_API_BASE_URL}/api/users/`,
     credentials: 'include',
   }),
   endpoints: (builder) => ({

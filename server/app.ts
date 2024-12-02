@@ -7,9 +7,10 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser';
 
 dotenv.config(); 
+
 const app = express();
 const corsOptions = {
-    origin:"https://bloggy-hze7.vercel.app",
+    origin: process.env.CORS_ORIGIN,
     methods: ['GET', 'POST', 'OPTIONS','PUT','PATCH','DELETE'], 
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
