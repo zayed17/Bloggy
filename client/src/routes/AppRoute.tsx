@@ -5,6 +5,7 @@ import SignupPage from '../pages/SignupPage';
 import HomePage from '../pages/HomePage';
 import AddBlogPage from '../pages/AddBlogPage';
 import BlogListPage from '../pages/BlogListPage';
+import EditBlogPage from '../pages/EditBlogPage';
 
 
 
@@ -17,6 +18,7 @@ const AppRouter: React.FC = () => {
         <Route path="/home" element={<HomePage/>} />
         <Route path="/add-blog" element={<AddBlogPage/>} />
         <Route path="/my-blog" element={<BlogListPage/>} />
+        <Route path="/edit-blog/:id" element={<EditBlogPage/>} />
       </Routes>
     </Router>
   );

@@ -1,13 +1,13 @@
 import React from "react";
 import { Table, Button, Avatar, Spin, Alert, message, Popconfirm } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { useGetUserblogQuery, useDeleteblogMutation } from "../api/blogApi";
 
 const BlogListTable: React.FC = () => {
   const { data: blogs, error, isLoading, refetch } = useGetUserblogQuery({});
   const [deleteBlog] = useDeleteblogMutation();
-  console.log(blogs, "checking for blog");
+  const navigate = useNavigate()
 
   const columns = [
     {
@@ -44,7 +44,7 @@ const BlogListTable: React.FC = () => {
             icon={<EditOutlined />}
             className="bg-blue-500 text-white rounded-lg hover:bg-blue-600"
             size="small"
-            onClick={() => handleEdit(record)}
+            onClick={() => handleEdit(record._id)}
           />
           <Popconfirm
             title="Are you sure you want to delete this blog?"
@@ -63,8 +63,8 @@ const BlogListTable: React.FC = () => {
     },
   ];
 
-  const handleEdit = (record: any) => {
-    console.log("Edit blog:", record);
+  const handleEdit = (id: any) => {
+    navigate(`/edit-blog/${id}`)
   };
 
   const handleDelete = async (id: string) => {

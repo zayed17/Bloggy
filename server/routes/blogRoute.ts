@@ -1,6 +1,6 @@
 import express from 'express';
 import authMiddleware from '../middlewares/authMiddleware';
-import { addblog, deleteBlog, getBlog, getUserBlog } from '../controllers/blogController';
+import { addblog, deleteBlog, getBlog, getBlogById, getUserBlog } from '../controllers/blogController';
 import multer from 'multer';
 import multerS3 from 'multer-s3';
 import { S3Client } from '@aws-sdk/client-s3';
@@ -38,6 +38,7 @@ router.get('/get-blog',getBlog);
 router.get('/get-user-blog',authMiddleware,getUserBlog);
 router.delete('/delete/:id',deleteBlog);
 router.post('/add-blog', upload.single('image'),authMiddleware,addblog);
+router.get('/get-blog/:id',getBlogById);
 
 
 
