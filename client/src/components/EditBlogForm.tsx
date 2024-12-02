@@ -54,7 +54,7 @@ const EditBlogForm: React.FC = () => {
     try {
       await editBlog({ id, data: formData }).unwrap();
       message.success("Blog updated successfully!");
-      navigate('/home');
+      navigate('/');
     } catch (error) {
       console.error(error);
       message.error("Failed to update the blog.");

@@ -40,7 +40,7 @@ const AddBlogForm: React.FC = () => {
     try {
       await addblog(formData).unwrap();
       message.success("Blog added successfully!");
-      navigate('/home');
+      navigate('/');
 
     } catch (error) {
       console.error(error);

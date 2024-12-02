@@ -97,7 +97,7 @@ const BlogListTable: React.FC = () => {
       {!isLoading && !error && (
         <>
           <div className="mb-4">
-            <Link to="/home">
+            <Link to="/">
               <Button className="bg-gray-500 text-white rounded-lg hover:bg-gray-600">
                 Back to Home
               </Button>
