@@ -83,6 +83,7 @@ export const getUser = async (req: any, res: Response) => {
 
 export const logout = (req: Request, res: Response) => {
     try {
+        console.log("chekcing")
         res.clearCookie("userToken", {
             httpOnly: true,
             sameSite: 'none',
