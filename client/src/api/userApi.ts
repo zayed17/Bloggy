@@ -4,7 +4,7 @@ export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({
     // baseUrl: 'http://localhost:1717/api/users/',
-    baseUrl: 'https://bloggy-backend-f0tt4f90r-mohammad-zayeds-projects.vercel.app/api/users/',
+    baseUrl: 'https://bloggy-backend-nine.vercel.app/api/users/',
     credentials: 'include',
   }),
   endpoints: (builder) => ({
