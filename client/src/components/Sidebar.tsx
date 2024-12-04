@@ -13,6 +13,7 @@ const Sidebar: React.FC = () => {
   const handleLogout = async () => {
     try {
       await logout({});
+      localStorage.removeItem("userToken")
       message.success("Logged out successfully!");
       window.location.href = "/login";
     } catch (error) {

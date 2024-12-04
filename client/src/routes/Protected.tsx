@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useGetUserQuery } from "../api/userApi";
+import React from "react";
+import { Navigate } from "react-router-dom";
 
 interface ProtectedRouteProps {
   element: React.ComponentType;
@@ -8,30 +7,10 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element: Component, redirectTo }) => {
-  const { data, isLoading, isError } = useGetUserQuery({});
-  const [shouldRedirect, setShouldRedirect] = useState(false); 
-  const navigate = useNavigate();
+  const token = localStorage.getItem("userToken");
 
-  useEffect(() => {
-    if (isError || !data) {
-      const timer = setTimeout(() => {
-        setShouldRedirect(true); 
-      }, 500); 
-
-      return () => clearTimeout(timer);
-    } else {
-      setShouldRedirect(false); 
-    }
-  }, [isError, data]);
-
-  useEffect(() => {
-    if (shouldRedirect) {
-      navigate(redirectTo);
-    }
-  }, [shouldRedirect, navigate, redirectTo]);
-
-  if (isLoading || isError || !data) {
-    return null; 
+  if (!token) {
+    return <Navigate to={redirectTo} replace />;
   }
 
   return <Component />;

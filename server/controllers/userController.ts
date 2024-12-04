@@ -53,7 +53,7 @@ export const login = async (req: Request, res: Response) => {
             sameSite: 'none',
             secure: true,
             maxAge: 3600000,
-        }); res.status(200).json({ message: 'Login successful' });
+        }); res.status(200).json({ message: 'Login successful' ,token});
     } catch (error) {
         console.error('Login error:', error);
         res.status(500).json({ message: 'Internal server error' });

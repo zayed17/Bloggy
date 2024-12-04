@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useGetUserQuery } from "../api/userApi";
+import React from "react";
+import { Navigate } from "react-router-dom";
 
 interface PublicRouteProps {
   element: React.ComponentType;
@@ -8,25 +7,10 @@ interface PublicRouteProps {
 }
 
 const PublicRoute: React.FC<PublicRouteProps> = ({ element: Component, redirectTo }) => {
-  const { data, isLoading, isError, error } = useGetUserQuery({});
-  const navigate = useNavigate();
+  const token = localStorage.getItem("userToken");
 
-  useEffect(() => {
-    if (data && !isError) {
-      navigate(redirectTo);
-    }
-  }, [data, isError, navigate, redirectTo]);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError && error && 'status' in error && error.status === 401) {
-    return <Component />;
-  }
-
-  if (isError || data) {
-    return null;
+  if (token) {
+    return <Navigate to={redirectTo} replace />;
   }
 
   return <Component />;

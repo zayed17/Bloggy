@@ -12,7 +12,8 @@ const LoginForm: React.FC = () => {
   const onFinish = async(values: any) => {
     const {email,password} = values
     try {
-      await login({ email, password }).unwrap();
+    const res =   await login({ email, password }).unwrap();
+      localStorage.setItem('userToken',res.token)
       message.success('Login successful');
       navigate('/');
     } catch (err:any) {
