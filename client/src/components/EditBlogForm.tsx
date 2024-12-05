@@ -2,22 +2,21 @@ import React, { useEffect, useState } from "react";
 import { Form, Input, Button, Upload, message, Space } from "antd";
 import { UploadOutlined, DeleteOutlined } from "@ant-design/icons";
 import { RcFile, UploadChangeParam, UploadFile } from "antd/es/upload/interface";
-import { useAddblogMutation, useGetBlogByIdQuery } from "../api/blogApi";
+import { useEditBlogMutation, useGetBlogByIdQuery } from "../api/blogApi";
 import { useNavigate, useParams } from "react-router-dom";
 
 const EditBlogForm: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { data: blog, isLoading: isBlogLoading } = useGetBlogByIdQuery(id!);
-  const [editBlog, { isLoading: isSaving }] = useAddblogMutation();
+  const [editBlog, { isLoading: isSaving }] = useEditBlogMutation();
 
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   useEffect(() => {
     if (blog) {
-      // If blog data exists, set initial values for the form
-      setImagePreview(blog.image);
+      setImagePreview(blog.imageUrl);
       setFileList([]);
     }
   }, [blog]);
@@ -31,7 +30,7 @@ const EditBlogForm: React.FC = () => {
       reader.onload = () => setImagePreview(reader.result as string);
       reader.readAsDataURL(file);
     } else {
-      setImagePreview(null);
+      setImagePreview(null); 
     }
   };
 
@@ -42,17 +41,17 @@ const EditBlogForm: React.FC = () => {
 
   const onFinish = async (values: any) => {
     const formData = new FormData();
+
     formData.append("title", values.title);
     formData.append("description", values.description);
 
     if (fileList.length > 0) {
       formData.append("image", fileList[0].originFileObj as RcFile);
-    } else if (imagePreview) {
-      formData.append("image", imagePreview); // Send current image if not changed
-    }
+    } 
 
     try {
-      await editBlog({ id, data: formData }).unwrap();
+      console.log(formData,"cehckin in")
+      await editBlog({ id,  formData }).unwrap();
       message.success("Blog updated successfully!");
       navigate('/');
     } catch (error) {

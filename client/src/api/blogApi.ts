@@ -32,9 +32,17 @@ export const blogApi = createApi({
           method: 'DELETE',
         }),
       }),
-   
+      editBlog: builder.mutation({
+
+        query: ({ id, formData }) => ({
+
+          url: `/edit-blog/${id}`,
+          method: 'PUT',
+          body: formData, 
+        }),
+      }),
       
   }),
 });
 
-export const { useAddblogMutation,useDeleteblogMutation,useGetblogQuery,useGetUserblogQuery,useGetBlogByIdQuery} = blogApi;
+export const { useAddblogMutation,useDeleteblogMutation,useGetblogQuery,useGetUserblogQuery,useGetBlogByIdQuery,useEditBlogMutation} = blogApi;
